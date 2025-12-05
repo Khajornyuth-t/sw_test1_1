@@ -1,0 +1,50 @@
+ID,Category,Test Case,Input,Expected Valid,Expected Error
+V01,Valid,Valid - minimum length (8),Abc1234!,True,
+V02,Valid,Valid - maximum length (20),Abcdefgh12345678!@#$,True,
+V03,Valid,Valid - all special chars,Aa1!@#$%^&*()_+=,True,
+V04,Valid,Valid - mixed position,!aA1bbbb,True,
+L01,Length,Too short - 0 chars,,False,Length must be 8-20 characters
+L02,Length,Too short - 1 char,A,False,Length must be 8-20 characters
+L03,Length,Too short - 7 chars,Abc123!,False,Length must be 8-20 characters
+L04,Length,Boundary - 8 chars,Abc1234!,True,
+L05,Length,Boundary - 20 chars,Abcdefgh12345678!@#$,True,
+L06,Length,Too long - 21 chars,Abcdefgh12345678!@#$A,False,Length must be 8-20 characters
+LC01,Lowercase,Missing lowercase,ABCD1234!,False,Must contain at least 1 lowercase letter (a-z)
+LC02,Lowercase,Has 1 lowercase,ABCDEFg1!,True,
+LC03,Lowercase,All lowercase + others,abcdefg1!A,True,
+UC01,Uppercase,Missing uppercase,abcd1234!,False,Must contain at least 1 uppercase letter (A-Z)
+UC02,Uppercase,Has 1 uppercase,abcdefG1!,True,
+UC03,Uppercase,All uppercase + others,ABCDEFGa1!,True,
+D01,Digit,Missing digit,Abcdefgh!,False,Must contain at least 1 digit (0-9)
+D02,Digit,Has 1 digit,Abcdefg1!,True,
+D03,Digit,All digits 0-9,Aa!0123456789,True,
+S01,Special,Missing special,Abcd1234,False,Must contain at least 1 special character
+S02,Special,Has !,Abcd1234!,True,
+S03,Special,Has @,Abcd1234@,True,
+S04,Special,Has #,Abcd1234#,True,
+S05,Special,Has $,Abcd1234$,True,
+S06,Special,Has %,Abcd1234%,True,
+S07,Special,Has ^,Abcd1234^,True,
+S08,Special,Has &,Abcd1234&,True,
+S09,Special,Has *,Abcd1234*,True,
+S10,Special,Has (,Abcd1234(,True,
+S11,Special,Has ),Abcd1234),True,
+S12,Special,Has _,Abcd1234_,True,
+S13,Special,Has +,Abcd1234+,True,
+S14,Special,Has =,Abcd1234=,True,
+W01,Whitelist,Has space,Abc 1234!,False,Contains invalid characters
+W02,Whitelist,Has <,Abc1234!<,False,Contains invalid characters
+W03,Whitelist,Has >,Abc1234!>,False,Contains invalid characters
+W04,Whitelist,Has ',Abc1234!',False,Contains invalid characters
+W05,Whitelist,"Has ""","Abc1234!""",False,Contains invalid characters
+W06,Whitelist,Has ;,Abc1234!;,False,Contains invalid characters
+W07,Whitelist,Has :,Abc1234!:,False,Contains invalid characters
+W08,Whitelist,Has /,Abc1234!/,False,Contains invalid characters
+W09,Whitelist,Has \,Abc1234!\,False,Contains invalid characters
+W10,Whitelist,Has -,Abc1234!-,False,Contains invalid characters
+W11,Whitelist,Has .,Abc1234!.,False,Contains invalid characters
+W12,Whitelist,Has Thai,Abc1234!ก,False,Contains invalid characters
+M01,Multiple,Short + no upper + no special,abc1,False,Length + Uppercase + Special
+M02,Multiple,No lower + no digit,ABCDEFGH!,False,Lowercase + Digit
+M03,Multiple,All wrong,???,False,Length + Lowercase + Uppercase + Digit + Special
+M04,Multiple,Long + invalid char,Abcdefgh12345678!@#$<>,False,Length + Whitelist
